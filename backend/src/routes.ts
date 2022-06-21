@@ -2,6 +2,8 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', () => console.log('Hello World! 🚀'));
+router.get('/', () => {
+  throw new Error('TESTE');
+});
 
 export { router };
