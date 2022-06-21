@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Grazziano B. Fagundes",
   "license": "MIT",
+  "scripts": {
+    "dev": "ts-node-dev src/server.ts"
+  },
   "devDependencies": {
     "@types/express": "^4.17.13",
     "ts-node-dev": "^2.0.0",
