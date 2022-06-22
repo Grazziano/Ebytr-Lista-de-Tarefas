@@ -9,3 +9,13 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Task {
+  id         String   @id @default(uuid())
+  name       String
+  status     String   @default("pendente")
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  @@map("tasks")
+}
