@@ -56,16 +56,40 @@ Para clonar usando SSH:
 git clone git@github.com:Grazziano/Ebytr-Lista-de-Tarefas.git
 ```
 
+### Backend
+
 Entre na pasta do projeto:
 
 ```
-cd Ebytr-Lista-de-Tarefas
+cd Ebytr-Lista-de-Tarefas/backend/
 ```
 
 Instale as dependências do projeto com yarn:
 
 ```
 yarn
+```
+
+Renomeie o arquivo .env.example para .env:
+
+Crie o banco de dados MySQL:
+
+Coloque as informações referentes ao seu banco de dados na variável de ambiente DATABASE_URL conforme o modelo:
+
+```
+DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"
+```
+
+Caso prefira usar Postgres:
+
+```
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=public"
+```
+
+Rode as migrations:
+
+```
+yarn prisma migrate dev
 ```
 
 Inicie o projeto:
