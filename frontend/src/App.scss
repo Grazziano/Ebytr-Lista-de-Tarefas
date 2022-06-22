@@ -1,7 +1,15 @@
-.container {
-  background-color: red;
+:root {
+  --white: #fff;
+  --black: #000;
 
-  h1 {
-    color: green;
-  }
+  --dark-900: #101026;
+  --dark-700: #1d1d2e;
+
+  --gray-100: #848484;
+  --green-900: #3fffa3;
+  --red-900: #ff3f4b;
+}
+
+body {
+  background-color: var(--dark-700);
 }
