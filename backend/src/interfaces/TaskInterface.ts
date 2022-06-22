@@ -2,4 +2,8 @@ interface TaskRequest {
   name: string;
 }
 
-export { TaskRequest };
+interface TaskIdRequest {
+  task_id: string;
+}
+
+export { TaskRequest, TaskIdRequest };
