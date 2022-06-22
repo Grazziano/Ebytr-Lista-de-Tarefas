@@ -1,9 +1,10 @@
 import { Request, Response } from 'express';
+import { TaskRequest } from '../../interfaces/TaskInterface';
 import { CreateTaskService } from '../../services/task/CreateTaskService';
 
 class CreateTaskController {
   async handle(req: Request, res: Response) {
-    const { name } = req.body;
+    const { name }: TaskRequest = req.body;
 
     const createTask = new CreateTaskService();
 
