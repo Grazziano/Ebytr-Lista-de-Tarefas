@@ -22,9 +22,32 @@ export default function Home() {
     // console.log(value, taskId);
     axios
       .put(`${baseURL}/task/status`, { task_id: taskId, status: value })
-      .then((response) => console.log(response))
-      .catch((e) => console.log(e));
-    toast('Status Alterado com sucesso!');
+      .then((response) => {
+        console.log(response);
+        toast.success('Status Alterado com sucesso!');
+        listTask();
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error('Falha!');
+      });
+  }
+
+  function handleRemove(id) {
+    axios
+      .delete(`${baseURL}/task/remove`, {
+        params: {
+          task_id: id,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        toast.success('Tarefa excluída!');
+        listTask();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   useEffect(() => {
@@ -53,6 +76,7 @@ export default function Home() {
                 name=""
                 id=""
                 onChange={({ target }) => handleStatus(target.value, task.id)}
+                value={task.status}
               >
                 <option value="pendente">pendente</option>
                 <option value="em andamento">em andamento</option>
@@ -63,7 +87,7 @@ export default function Home() {
                 <button>
                   <BiEdit color="#ffd900" />
                 </button>
-                <button>
+                <button onClick={() => handleRemove(task.id)}>
                   <AiFillDelete color="#ca2727" />
                 </button>
               </div>
