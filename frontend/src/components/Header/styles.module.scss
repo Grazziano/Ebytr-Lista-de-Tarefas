@@ -1,5 +1,7 @@
 .headerContainer {
   height: 5rem;
+  background-color: var(--dark-900);
+  border-bottom: 1px solid var(--green-900);
 }
 
 .headerContent {
@@ -9,6 +11,10 @@
   margin: 0 auto;
   justify-content: space-between;
   align-items: center;
+
+  img {
+    width: auto;
+  }
 
   h1 {
     color: var(--red-900);

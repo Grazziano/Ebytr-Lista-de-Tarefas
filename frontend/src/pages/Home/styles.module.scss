@@ -56,6 +56,10 @@
     padding: 1rem;
   }
 
+  select option {
+    background-color: var(--dark-700);
+  }
+
   select:active {
     background-color: var(--dark-700);
   }
