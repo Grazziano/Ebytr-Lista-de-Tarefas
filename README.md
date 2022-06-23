@@ -98,6 +98,20 @@ Inicie o projeto:
 yarn dev
 ```
 
+### Frontend
+
+Instale as dependencias:
+
+```
+npm install
+```
+
+Inicie o projeto:
+
+```
+npm start
+```
+
 <!-- ## ☕ Usando <nome_do_projeto>
 
 Para usar <nome_do_projeto>, siga estas etapas:
