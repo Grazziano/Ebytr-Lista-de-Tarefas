@@ -5,21 +5,26 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
 import { toast } from 'react-toastify';
+import Loading from '../../components/Loading';
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const baseURL = 'http://localhost:3001';
 
   function listTask() {
+    setLoading(true);
     axios.get(`${baseURL}/task`).then((response) => {
       // console.log(response.data);
       setTasks(response.data);
     });
+    setLoading(false);
   }
 
   function handleStatus(value, taskId) {
     // console.log(value, taskId);
+    setLoading(true);
     axios
       .put(`${baseURL}/task/status`, { task_id: taskId, status: value })
       .then((response) => {
@@ -31,9 +36,11 @@ export default function Home() {
         console.log(e);
         toast.error('Falha!');
       });
+    setLoading(false);
   }
 
   function handleRemove(id) {
+    setLoading(true);
     axios
       .delete(`${baseURL}/task/remove`, {
         params: {
@@ -48,11 +55,14 @@ export default function Home() {
       .catch((error) => {
         console.log(error);
       });
+    setLoading(false);
   }
 
   useEffect(() => {
     listTask();
   }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <main className={styles.container}>
