@@ -1,21 +1,34 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { FiRefreshCw } from 'react-icons/fi';
 import { BiEdit } from 'react-icons/bi';
 import { AiFillDelete } from 'react-icons/ai';
-import setupAPIClient from '../../services/api';
+import { toast } from 'react-toastify';
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
 
-  async function getAllTasks() {
-    const data = await setupAPIClient();
-    console.log(data);
-    setTasks(data);
+  const baseURL = 'http://localhost:3001';
+
+  function listTask() {
+    axios.get(`${baseURL}/task`).then((response) => {
+      // console.log(response.data);
+      setTasks(response.data);
+    });
+  }
+
+  function handleStatus(value, taskId) {
+    // console.log(value, taskId);
+    axios
+      .put(`${baseURL}/task/status`, { task_id: taskId, status: value })
+      .then((response) => console.log(response))
+      .catch((e) => console.log(e));
+    toast('Status Alterado com sucesso!');
   }
 
   useEffect(() => {
-    getAllTasks();
+    listTask();
   }, []);
 
   return (
@@ -36,10 +49,14 @@ export default function Home() {
                 <span>{task.name}</span>
               </button>
 
-              <select name="" id="">
-                <option value="">pendente</option>
-                <option value="">em andamento</option>
-                <option value="">pronto</option>
+              <select
+                name=""
+                id=""
+                onChange={({ target }) => handleStatus(target.value, task.id)}
+              >
+                <option value="pendente">pendente</option>
+                <option value="em andamento">em andamento</option>
+                <option value="pronto">pronto</option>
               </select>
 
               <div className={styles.divButtons}>
