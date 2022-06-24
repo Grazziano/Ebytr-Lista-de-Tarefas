@@ -2,13 +2,13 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { FiRefreshCw } from 'react-icons/fi';
-import { BiEdit } from 'react-icons/bi';
-import { AiFillDelete } from 'react-icons/ai';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
+import RemoveIcon from '../../assets/img/icons8-excluir-96.png';
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
+  const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
 
   const baseURL = 'http://localhost:3001';
@@ -16,14 +16,12 @@ export default function Home() {
   function listTask() {
     setLoading(true);
     axios.get(`${baseURL}/task`).then((response) => {
-      // console.log(response.data);
       setTasks(response.data);
     });
     setLoading(false);
   }
 
   function handleStatus(value, taskId) {
-    // console.log(value, taskId);
     setLoading(true);
     axios
       .put(`${baseURL}/task/status`, { task_id: taskId, status: value })
@@ -37,6 +35,21 @@ export default function Home() {
         toast.error('Falha!');
       });
     setLoading(false);
+  }
+
+  function handleUpdate(id) {
+    console.log(id);
+
+    axios
+      .put(`${baseURL}/task/update`, { task_id: id, name: inputValue })
+      .then((response) => {
+        console.log(response.data);
+        toast.success('Tarefa atualizada com sucesso!');
+      })
+      .catch((e) => {
+        console.log(e);
+        toast.error('Falha!');
+      });
   }
 
   function handleRemove(id) {
@@ -60,7 +73,8 @@ export default function Home() {
 
   useEffect(() => {
     listTask();
-  }, []);
+    console.log(inputValue);
+  }, [inputValue]);
 
   if (loading) return <Loading />;
 
@@ -68,7 +82,7 @@ export default function Home() {
     <main className={styles.container}>
       <div className={styles.containerHeader}>
         <h1>Tarefas</h1>
-        <button>
+        <button onClick={listTask}>
           <FiRefreshCw size={25} color="#3fffa3" />
         </button>
       </div>
@@ -79,8 +93,14 @@ export default function Home() {
             <section className={styles.taskItem} key={task.id}>
               <button>
                 <div className={styles.tag}></div>
-                <span>{task.name}</span>
               </button>
+
+              <input
+                type="text"
+                defaultValue={task.name}
+                onChange={(e) => setInputValue(e.target.value)}
+                onBlur={() => handleUpdate(task.id)}
+              />
 
               <select
                 name=""
@@ -94,11 +114,8 @@ export default function Home() {
               </select>
 
               <div className={styles.divButtons}>
-                <button>
-                  <BiEdit color="#ffd900" />
-                </button>
                 <button onClick={() => handleRemove(task.id)}>
-                  <AiFillDelete color="#ca2727" />
+                  <img src={RemoveIcon} alt="Delete" width={25} />
                 </button>
               </div>
             </section>
