@@ -7,7 +7,7 @@ class RemoveTaskController {
 
     const removeTask = new RemoveTaskService();
 
-    const result = await removeTask.execute({ task_id });
+    await removeTask.execute({ task_id });
 
     return res.status(200).end();
   }
