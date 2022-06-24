@@ -40,7 +40,7 @@ export default function Home() {
   }
 
   function handleUpdate(id) {
-    console.log(id);
+    if (inputValue === '') return;
 
     axios
       .put(`${baseURL}/task/update`, { task_id: id, name: inputValue })
@@ -52,6 +52,8 @@ export default function Home() {
         console.log(e);
         toast.error('Falha!');
       });
+
+    setInputValue('');
   }
 
   function handleRemove(id) {
@@ -121,6 +123,8 @@ export default function Home() {
       </div>
 
       <article className={styles.listTasks}>
+        {tasks.length === 0 && <h1>Nenhuma tarefa disponível no momento</h1>}
+
         {tasks.map((task) => {
           return (
             <section className={styles.taskItem} key={task.id}>
