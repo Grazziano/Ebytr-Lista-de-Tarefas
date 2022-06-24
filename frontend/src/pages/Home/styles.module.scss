@@ -90,3 +90,31 @@
     margin-right: 1rem;
   }
 }
+
+.form {
+  display: flex;
+  margin-bottom: 1rem;
+
+  input {
+    height: 2.8rem;
+    background: transparent;
+    border: 1px solid var(--green-900);
+    border-radius: 0.3rem;
+    color: var(--white);
+    height: 55px;
+    font-size: large;
+    width: 100%;
+  }
+
+  button {
+    height: 4rem;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    margin-left: 0.3rem;
+  }
+
+  img {
+    width: 3rem;
+  }
+}

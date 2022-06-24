@@ -5,11 +5,13 @@ import { FiRefreshCw } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import Loading from '../../components/Loading';
 import RemoveIcon from '../../assets/img/icons8-excluir-96.png';
+import AddIcon from '../../assets/img/icons8-adicionar-96.png';
 
 export default function Home() {
   const [tasks, setTasks] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [loading, setLoading] = useState(false);
+  const [newTaskValue, setNewTaskValue] = useState('');
 
   const baseURL = 'http://localhost:3001';
 
@@ -71,6 +73,26 @@ export default function Home() {
     setLoading(false);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (newTaskValue === '') {
+      toast.error('Nome da Task é obrigatório');
+      return;
+    }
+
+    axios
+      .post(`${baseURL}/task`, { name: newTaskValue })
+      .then((response) => {
+        console.log(response.data);
+        setNewTaskValue('');
+        toast.success('Tarefa criada com sucesso!');
+        listTask();
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
   useEffect(() => {
     listTask();
     console.log(inputValue);
@@ -80,6 +102,17 @@ export default function Home() {
 
   return (
     <main className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <input
+          type="text"
+          value={newTaskValue}
+          onChange={({ target }) => setNewTaskValue(target.value)}
+        />
+        <button type="submit">
+          <img src={AddIcon} alt="Add" />
+        </button>
+      </form>
+
       <div className={styles.containerHeader}>
         <h1>Tarefas</h1>
         <button onClick={listTask}>
