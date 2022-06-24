@@ -41,12 +41,12 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 #### Funcionalidades
 
-- [ ] Visualizar a lista de tarefas
+- [X] Visualizar a lista de tarefas
   - [ ] Esta lista deve ser ordenável por ordem alfabética, data de criação ou por status
-- [ ] Inserir uma nova tarefa na lista;
-- [ ] Remover uma tarefa da lista;
-- [ ] Atualizar uma tarefa da lista;
-- [ ] A tarefa deve possuir um status editável: pendente, em andamento ou pronto;
+- [X] Inserir uma nova tarefa na lista;
+- [X] Remover uma tarefa da lista;
+- [X] Atualizar uma tarefa da lista;
+- [X] A tarefa deve possuir um status editável: pendente, em andamento ou pronto;
 
 ## 🚀 Instalando Ebytr Lista de Tarefas
 
