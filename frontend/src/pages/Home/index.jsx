@@ -95,9 +95,44 @@ export default function Home() {
       });
   }
 
+  function compareByName(a, b) {
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+    return 0;
+  }
+
+  function compareByDate(a, b) {
+    if (a.created_at < b.created_at) return -1;
+    if (a.created_at > b.created_at) return 1;
+    return 0;
+  }
+
+  function compareByStatus(a, b) {
+    if (a.status < b.status) return -1;
+    if (a.status > b.status) return 1;
+    return 0;
+  }
+
+  function handleOrder(order) {
+    if (order === 'orderByName') {
+      axios.get(`${baseURL}/task`).then((response) => {
+        setTasks(response.data.sort(compareByName));
+      });
+    }
+    if (order === 'orderByDate') {
+      axios.get(`${baseURL}/task`).then((response) => {
+        setTasks(response.data.sort(compareByDate));
+      });
+    }
+    if (order === 'orderByStatus') {
+      axios.get(`${baseURL}/task`).then((response) => {
+        setTasks(response.data.sort(compareByStatus));
+      });
+    }
+  }
+
   useEffect(() => {
     listTask();
-    console.log(inputValue);
   }, [inputValue]);
 
   if (loading) return <Loading />;
@@ -120,6 +155,34 @@ export default function Home() {
         <button onClick={listTask}>
           <FiRefreshCw size={25} color="#3fffa3" />
         </button>
+      </div>
+
+      <div className={styles.radio}>
+        <span className={styles.selectTag}>Ordenar lista por: </span>
+        <input
+          label="ordem alfabética"
+          type="radio"
+          id="orderByName"
+          name="order"
+          value="orderByName"
+          onClick={({ target }) => handleOrder(target.value)}
+        />
+        <input
+          label="data de criação"
+          type="radio"
+          id="orderByDate"
+          name="order"
+          value="orderByDate"
+          onClick={({ target }) => handleOrder(target.value)}
+        />
+        <input
+          label="status"
+          type="radio"
+          id="orderByStatus"
+          name="order"
+          value="orderByStatus"
+          onClick={({ target }) => handleOrder(target.value)}
+        />
       </div>
 
       <article className={styles.listTasks}>
