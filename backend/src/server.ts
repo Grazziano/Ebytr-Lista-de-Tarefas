@@ -4,16 +4,16 @@ import cors from 'cors';
 
 import { router } from './routes';
 
-const app = express();
+const server = express();
 
 const port = 3001;
 
-app.use(express.json());
-app.use(cors());
+server.use(express.json());
+server.use(cors());
 
-app.use(router);
+server.use(router);
 
-app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
+server.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   if (err instanceof Error) {
     return res.status(400).json({ error: err.message });
   }
@@ -23,4 +23,6 @@ app.use((err: Error, _req: Request, res: Response, next: NextFunction) => {
   next();
 });
 
-app.listen(port, () => console.log(`Server listening on port ${port}! 🚀`));
+server.listen(port, () => console.log(`Server listening on port ${port}! 🚀`));
+
+export default server;
