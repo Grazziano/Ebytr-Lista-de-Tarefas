@@ -8,7 +8,10 @@
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
     "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix"
+    "lint-fix": "eslint . --ext .ts --fix",
+    "studio": "yarn prisma studio",
+    "migrate": "yarn prisma migrate dev",
+    "generate": "yarn prisma generate"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
