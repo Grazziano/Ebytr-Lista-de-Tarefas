@@ -9,6 +9,8 @@ services:
       - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
     ports:
       - $DB_PORT:3306
+    # volumes:
+    #   - ./bancodedados:/var/db
 
   api:
     image: node:latest
@@ -26,3 +28,14 @@ services:
       - ./backend:/usr/app
     working_dir: /usr/app
     command: bash -c "yarn && yarn dev"
+
+  client:
+    image: node:latest
+    container_name: container_react
+    restart: always
+    ports:
+      - $CLIENT_PORT:$CLIENT_PORT
+    volumes:
+      - ./frontend:/usr/app
+    working_dir: /usr/app
+    command: bash -c "npm install && npm start"

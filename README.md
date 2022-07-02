@@ -133,7 +133,63 @@ npm start
 ```
 </details>
 
+<br>
 
+<details>
+  <summary><b>Docker</b></summary><br>
+
+Na mesma pasta do arquivo docker-compose.yml execute os passos abaixo:
+
+```
+docker-compose up -d
+```
+
+Liste os container e devem ter os serviços do mysql, api e o frontend disponiveis:
+
+```
+docker ps
+```
+
+Agora prescisamos criar um banco de dados:
+
+Acesse o banco mysql da aplicação com o comando:
+
+```
+docker exec -it container_mysql bash
+```
+
+Você acabou de acesar o terminal do MySQL rodando no docker, agora vamos acessar com o usuário root e criar o banco de dados da nossa aplicação:
+
+Execute o comando:
+
+```
+mysql -u root -p
+```
+
+Digite a senha do usuário root, por padrão a senha definida é <strong>admin</strong>.
+
+Por fim crie o banco.
+
+```
+create database task_list;
+```
+
+Agora que temos o banco criado vamos subir as migrations:
+
+Acesse o container da api:
+
+```
+docker exec -it container_api /bin/sh
+```
+
+Rode a migration:
+
+```
+yarn prisma migrate dev
+```
+</details>
+
+<br>
 <!-- ## ☕ Usando <nome_do_projeto>
 
 Para usar <nome_do_projeto>, siga estas etapas:
