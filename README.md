@@ -223,7 +223,7 @@ O retorno esperado será:
 
 ## Interface do Projeto
 
-![Project](readmeFiles/project.gif)
+![Project](readmeFiles/TODOLIST.gif)
 
 <br>
 
