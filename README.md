@@ -51,7 +51,9 @@ O projeto ainda está em desenvolvimento e as próximas atualizações serão vo
 
 ## 🚀 Instalando Ebytr Lista de Tarefas
 
-Para instalar o Ebytr Lista de Tarefas, siga estas etapas:
+Para rodar o Ebytr Lista de Tarefas na sua máquina, siga estas etapas:
+
+Para facilitar, por padrão o sistema já vem com o docker para ser executado.
 
 <details>
   <summary><b>Clonar</b></summary><br>
@@ -67,6 +69,43 @@ Para clonar usando SSH:
 ```
 git clone git@github.com:Grazziano/Ebytr-Lista-de-Tarefas.git
 ```
+</details>
+
+<br>
+
+<details>
+  <summary><b>Docker</b></summary><br>
+
+Na mesma pasta do arquivo docker-compose.yml execute os passos abaixo:
+
+```
+docker-compose up -d
+```
+
+Aguarde o docker subir os containers (pode demorar alguns segundos dependendo da sua máquina).
+
+Liste os container e devem ter os serviços do mysql, api e o frontend disponiveis:
+
+```
+docker ps
+```
+
+Para acessar a api você pode acessar a url:
+
+```
+http://localhost:3001/task
+```
+
+Já o frontend pode ser acessado pelo brownser no link abaixo:
+
+```
+http://localhost:3000
+```
+
+Se os container estiverem todos ok, o resultado da resposta do back deve ser um array vazio, visto que ainda existem tarefas salvas.
+
+Teste o front cadastrando uma nova tarefa.
+
 </details>
 
 <br>
@@ -135,84 +174,7 @@ npm start
 
 <br>
 
-<details>
-  <summary><b>Docker</b></summary><br>
-
-Na mesma pasta do arquivo docker-compose.yml execute os passos abaixo:
-
-```
-docker-compose up -d
-```
-
-Liste os container e devem ter os serviços do mysql, api e o frontend disponiveis:
-
-```
-docker ps
-```
-
-Agora prescisamos criar um banco de dados:
-
-Acesse o banco mysql da aplicação com o comando:
-
-```
-docker exec -it container_mysql bash
-```
-
-Você acabou de acesar o terminal do MySQL rodando no docker, agora vamos acessar com o usuário root e criar o banco de dados da nossa aplicação:
-
-Execute o comando:
-
-```
-mysql -u root -p
-```
-
-Digite a senha do usuário root, por padrão a senha definida é <strong>admin</strong>.
-
-Por fim crie o banco.
-
-```
-create database task_list;
-```
-
-Agora que temos o banco criado vamos subir as migrations:
-
-Acesse o container da api:
-
-```
-docker exec -it container_api /bin/sh
-```
-
-Rode a migration:
-
-```
-yarn prisma migrate dev
-```
-</details>
-
-<br>
-<!-- ## ☕ Usando <nome_do_projeto>
-
-Para usar <nome_do_projeto>, siga estas etapas:
-
-```
-<exemplo_de_uso>
-```
-
-Adicione comandos de execução e exemplos que você acha que os usuários acharão úteis. Fornece uma referência de opções para pontos de bônus!
-
-Como alternativa, consulte a documentação do GitHub em [como criar uma solicitação pull](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request). -->
-
-<!-- ## 📝 Licença
-
-Esse projeto está sob licença. Veja o arquivo [LICENÇA](LICENSE.md) para mais detalhes. -->
-
-## Paradigmas
-
-- Arquitetura em Camadas
-- REST
-- SOLID
-
-## Outras bibliotecas
+## Outras bibliotecas usadas
 
 - Express-Async-Errors
 - Prettier
