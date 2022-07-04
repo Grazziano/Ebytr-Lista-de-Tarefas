@@ -6,6 +6,7 @@
   "author": "Grazziano B. Fagundes",
   "license": "MIT",
   "scripts": {
+    "start": "yarn prisma migrate dev && yarn dev",
     "dev": "ts-node-dev src/server.ts",
     "lint": "eslint . --ext .ts",
     "lint-fix": "eslint . --ext .ts --fix",

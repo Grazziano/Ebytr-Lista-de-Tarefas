@@ -20,7 +20,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - 3001:3001
+      - $SERVER_PORT:$SERVER_PORT
     environment:
       # - DB_HOST=mysql
       - DB_NAME=$DB_NAME
@@ -30,7 +30,7 @@ services:
     volumes:
       - ./backend:/usr/app
     working_dir: /usr/app
-    command: bash -c "yarn && yarn dev"
+    command: bash -c "yarn && yarn start"
 
   client:
     image: node:latest
